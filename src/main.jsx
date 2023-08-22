@@ -6,7 +6,7 @@ import './index.css'
 import { AuthProvider } from './autcontex' ; // Import AuthProvider
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-        <AuthProvider> {/* Wrap your App component with AuthProvider */}
+    <AuthProvider> {/* Wrap your App component with AuthProvider */}
     <BrowserRouter> 
     <App />
     		{/*app ndiroh entre les browserrouter*/}	

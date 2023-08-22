@@ -1,7 +1,7 @@
 const express = require('express');
-const {requireAuth} = require('./src/controllers/authController')
 const app = express(); // Add parentheses to call the express function
 const mongoose = require('mongoose');
+require('dotenv').config(); // Chargez les variables d'environnement du fichier .env
 const authController = require('./src/controllers/authController')
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -34,16 +34,17 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', true);
   next();
 });
-const dbURI = 'mongodb+srv://myjwt:fVwnW0b46LnqEC9n@cluster0.iejtzdc.mongodb.net/users?retryWrites=true&w=majority';//// users = NOM DE database su atlas
-mongoose.connect( dbURI , { useNewUrlParser: true, useUnifiedTopology: true})
+const dburi = process.env.DBURI;
+mongoose.connect(dburi ,{ useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => { /// je peut faire ici connect aprés les autre collection createconnection
   console.log('Connected to userauth and commands');  
 })
-.catch(() => {
-  console.error('erreur userauth');
+.catch((error) => {
+  console.error('erreur userauth', error);
 })
-app.listen(3002 , ()=> {
-  console.log('3002 port')
+const PORT = process.env.PORT 
+app.listen(PORT, ()=> {
+  console.log('serveur started') 
 })
 
 
